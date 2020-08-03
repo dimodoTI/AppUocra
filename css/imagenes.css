@@ -1,0 +1,37 @@
+html {
+    --imagen-splash1: url("../assets/images/splash1.png");
+    --imagen-splash2: url("../assets/images/splash2.png");
+    --imagen-fondo-principal: url("../assets/images/fondo_principal.jpg");
+    --imagen-fondo-salud: url("../assets/images/fondo_salud.jpg");
+    --imagen-fondo-capacitacion: url("../assets/images/fondo_capacitacion.jpg");
+    --imagen-fondo-red: url("../assets/images/fondo_red.jpg");
+    --imagen-titulo-principal: url("../assets/images/titulo_principal.png");
+    --imagen-campana: url("../assets/images/campana.png");
+    --imagen-campana-notificacion: url("../assets/images/campana_noti.png");
+    --imagen-gremio: url("../assets/images/gremio.gif");
+    --imagen-salud: url("../assets/images/salud.gif");
+    --imagen-capacitacion: url("../assets/images/capacitacion.gif");
+    --imagen-red: url("../assets/images/red.gif");
+    --imagen-atras-gremio: url("../assets/images/atras_gremio.png");
+    --imagen-atras-salud: url("../assets/images/atras_salud.png");
+    --imagen-atras-capacitacion: url("../assets/images/atras_capacitacion.png");
+    --imagen-atras-red: url("../assets/images/atras_red.png");
+    --imagen-cabecera-uocra: url("../assets/images/cabecera_uocra.gif");
+    --imagen-cabecera-salud: url("../assets/images/cabecera_salud.gif");
+    --imagen-cabecera-capacitacion: url("../assets/images/cabecera_capacitacion.gif");
+    --imagen-cabecera-red: url("../assets/images/cabecera_red.gif");
+}
+
+view-manager {
+    background-size: 100vw 100vh;
+
+    background-position: center;
+    background-size: cover;
+    position: relative;
+
+}
+
+view-manager[media-size="small"] {
+    /* background-image: url('../assets/images/fondo.png'); */
+
+}

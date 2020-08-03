@@ -1,0 +1,18 @@
+html { 
+    --color-azul:#007AFF;
+    --color-azul-oscuro:#313E56;
+    --color-amarillo:#FFB300;
+    --color-rojo:#FF442B;
+    --color-verde:#43EA9A;
+    --color-gris-fondo:#FAFAFA;
+    --color-gris-claro:#E4E4E4;
+    --color-gris:#C0C0C0;
+    --color-gris-medio:#999999;
+    --color-gris-oscuro:#575656;
+    --color-blanco:#FFFFFF;
+    --color-negro:#000000;
+
+    --primary-color:#004A87;
+    --onsurface-color-helper: #5a5856;
+   
+}
