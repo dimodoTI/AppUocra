@@ -220,7 +220,7 @@ export class webScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElement) 
                 this.mIdNota = this.noticia.idNota;
                 var myLink = this.noticia.web
                 if (myLink.toUpperCase().indexOf("HTTP:") == -1 || myLink.toUpperCase().indexOf("HTTPS:") == -1) {
-                    myLink = "http://" + this.noticia.web
+                    myLink = "https://" + this.noticia.web
                 }
                 this.shadowRoot.querySelector("#myFrame").src = myLink
 

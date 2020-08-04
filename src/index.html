@@ -1,24 +1,32 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>UOCRA</title>
-    <!--    <link rel="manifest" href="manifest.json" /> -->
+    <title>U.O.C.R.A.</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport"
         content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
-    <link rel="apple-touch-icon" href="../assets/icons/favicon.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="../assets/icons/Icon-App-152x152@2x.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/Icon-App-180x180@1x.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="../assets/icons/Icon-App-167x167@2x.png">
+
+    <link rel="icon" href="https://www.uocra.net/AppUOCRA/icon-iphone.png">
+    <link rel="apple-touch-icon" href="https://www.uocra.net/AppUOCRA/icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://www.uocra.net/AppUOCRA/icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.uocra.net/AppUOCRA/icon-retina.png">
+    <link rel="apple-touch-icon" sizes="167x167" href="https://www.uocra.net/AppUOCRA/icon-ipadretina.png">
+    <meta name="apple-mobile-web-app-title" content="U.O.C.R.A.">
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-startup-image" href="launch-640x1136.png"
+        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+    <link rel="apple-touch-startup-image" href="launch-750x1294.png"
+        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+
+    <link rel="manifest" crossorigin="use-credentials" href="manifest.txt" />
+    <meta name="apple-touch-fullscreen" content="yes">
+
+
     <style>
         #snackbar {
             position: absolute;
@@ -58,8 +66,29 @@
     document.addEventListener('focusout', function (e) {
         window.scrollTo(0, 0)
     });
+
+    // document.body.addEventListener('touchmove', function (event) {
+    //     event.preventDefault();
+    // }, {
+    //     passive: false,
+    //     useCapture: false
+    // });
 </script>
-<!-- <script>
+
+<script>
+
+    // if ('serviceWorker' in navigator) {
+    //     window.addEventListener('load', () => {
+    //         navigator.serviceWorker.register('service-worker.js')
+    //             .then(registration => {
+    //                 console.log('Service Worker is registered', registration);
+    //             })
+    //             .catch(err => {
+    //                 console.error('Registration failed:', err);
+    //             });
+    //     });
+    // }
+
 
     let newWorker;
 
@@ -71,7 +100,7 @@
     });
 
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/Service-worker.js').then(reg => {
+        navigator.serviceWorker.register('Service-worker.js').then(reg => {
             reg.addEventListener('updatefound', () => {
                 // A wild service worker has appeared in reg.installing!
                 newWorker = reg.installing;
@@ -98,7 +127,7 @@
             refreshing = true;
         });
     }
-</script> -->
+</script>
 
 
 
