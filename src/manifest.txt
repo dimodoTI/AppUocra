@@ -1,7 +1,7 @@
 {
   "short_name": "U.O.C.R.A.",
   "name": "Red Social - U.O.C.R.A.",
-  "description": "Red Social - U.O.C.R.A.",
+  "description": "",
   "icons": [
     {
       "src": "splash512.png",
@@ -13,5 +13,6 @@
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "./",
-  "theme_color": "#ffffff"
+  "theme_color": "#ffffff",
+  "orientation":  "portrait"
 }

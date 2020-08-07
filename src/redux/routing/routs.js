@@ -20,12 +20,13 @@
 ] */
 
 export const largeRoute = [
-    "1-splash",
-    "2-principal",
-    "3/1-gremio",
-    "3/2-salud",
-    "3/3-capacitacion",
-    "3/4-red",
-    "4-noticia",
-    "5-web"
+    "1    -splash",
+    "2    -principal",
+    "3/1  -gremio",
+    "3/2  -salud",
+    "3/3  -capacitacion",
+    "3/4  -red",
+    "4    -noticia",
+    "5    -web",
+    "6    -pantallahorizontal"
 ]

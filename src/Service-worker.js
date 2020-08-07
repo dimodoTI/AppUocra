@@ -1,4 +1,4 @@
-const cacheName = 'Version3';
+const cacheName = 'Version1.2';
 const enCache = [
     "./index.html",
     "./splash512.png",
@@ -25,7 +25,6 @@ const enCache = [
     "./c9852356cd3569b8290e518bdff3c2cb.png",
     "./ddd15ed92d86ff6888295561b7b8462c.png",
     "./fd623af4fb8949433a0e90db4fed70ae.gif",
-    "./Service-worker.js",
     "./icon-ipad.png",
     "./icon-ipadretina.png",
     "./icon-iphone.png",
@@ -64,9 +63,10 @@ self.addEventListener('activate', function (event) {
     event.waitUntil(
         caches.keys().then(function (cacheNames) {
             return Promise.all(
-                cacheNames.filter(function (cacheName) {
-                }).map(function (cacheName) {
-                    return caches.delete(cacheName);
+                cacheNames.filter(function (cName) {
+                    return cName != cacheName
+                }).map(function (cName) {
+                    return caches.delete(cName);
                 })
             );
         })

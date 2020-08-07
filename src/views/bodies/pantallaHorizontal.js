@@ -18,7 +18,7 @@ import {
 
 const MEDIA_CHANGE = "ui.media.timeStamp"
 const SCREEN = "screen.timeStamp";
-export class splashScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElement) {
+export class pantallaHorizontalScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElement) {
     constructor() {
         super();
         this.hidden = true
@@ -30,7 +30,8 @@ export class splashScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElemen
         :host{
             display: grid;
             position:relative;
-            background-color:var(--primary-color) !important;
+            background-color:var(--color-gris-medio) !important;
+            z-index:1000;
         }
         :host([hidden]){
             display:none ;
@@ -41,7 +42,7 @@ export class splashScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElemen
             width: 100%;
             grid-gap:1rem;
             grid-template-rows: 25% 20% 15% 40%;
-            background-color:var(--color-blanco) !important;
+            background-color:var(--color-gris-medio) !important;
         }
         #uno{
             background-image:var(--imagen-splash1);
@@ -55,38 +56,37 @@ export class splashScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElemen
             background-position: center;
             background-size:  contain;
         }
+        #tres{
+            font-size: var(--font-header-h1-size);
+            font-weight: var(--font-header-h1-weight);
+            color: var(--color-blanco);
+            justify-self:center;
+
+        }
         `
     }
     render() {
         return html`
-        <div id="cuerpo" @click=${this.proximo}>
-            <div style="padding: 1vh 0 0 2vw">v.1.2</div>
-            <div id="uno">
-
-            </div>
-            <div id="dos">
-            </div>
-            <div></div>
+        <div id="cuerpo">
+            <div style="padding: 1vh 0 0 2vw">v.2.2</div>
+            <div id="uno"></div>
+            <div id="dos"></div>
+            <div id="tres">Esta App se visualiza en modo vertical</div>
         </div>
         `
     }
     stateChanged(state, name) {
         if ((name == SCREEN || name == MEDIA_CHANGE)) {
             this.mediaSize = state.ui.media.size
+            this.orientation = state.ui.media.orientation
             this.hidden = true
-            const haveBodyArea = isInLayout(state, this.area)
-            const SeMuestraEnUnasDeEstasPantallas = "-splash-".indexOf("-" + state.screen.name + "-") != -1
-            if (haveBodyArea && SeMuestraEnUnasDeEstasPantallas) {
+            if (window.orientation == 90 || window.orientation == -90) {
                 this.hidden = false
             }
             this.update();
         }
     }
 
-    proximo() {
-        //        store.dispatch(goNext());
-        store.dispatch(goTo("principal"));
-    }
     static get properties() {
         return {
             mediaSize: {
@@ -104,9 +104,13 @@ export class splashScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElemen
             },
             area: {
                 type: String
+            },
+            orientation: {
+                type: String,
+                reflect: true,
             }
         }
     }
 
 }
-window.customElements.define("splash-screen", splashScreen);
+window.customElements.define("pantalla-horizontal-screen", pantallaHorizontalScreen);

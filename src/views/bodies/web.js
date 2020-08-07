@@ -198,7 +198,7 @@ export class webScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElement) 
                 <div id="texto"></div>
             </div>
             <div id="noticia">
-                <iframe id="myFrame" ></iframe>
+                <iframe id="myFrame" style="background-color:var(--color-blanco)"></iframe>
             </div>
         </div>
         `

@@ -149,19 +149,19 @@ export class principalScreen extends connect(store, MENU_TIMESTAMP, MENU_ERRORGE
                 <hr id="linea" />
             </div>
             <div id="contenido">
-                <div id="uocra" class="punto" @click="${function () { this.clickIr('gremio', 1) }}">
+                <div id="uocra" class="punto" @click="${this.clickGremio}">
                     <div id="uocraImg" class="imagen">.</div>
                     <div id="uocraTxt" class="texto">MI GREMIO</div>
                 </div>
-                <div id="salud" class="punto" @click="${function () { this.clickIr('salud', 2) }}">
+                <div id="salud" class="punto" @click="${this.clickSalud}">
                     <div id="saludImg" class="imagen"></div>
                     <div id="saludTxt" class="texto">CONSTRUIR SALUD</div>
                 </div>
-                <div id="capacitacion" class="punto" @click="${function () { this.clickIr('capacitacion', 3) }}">
+                <div id="capacitacion" class="punto" @click="${this.clickCapacitacion}">
                     <div id="capacitacionImg" class="imagen"></div>
                     <div id="capacitacionTxt" class="texto">CAPACITACION Y CULTURA</div>
                 </div>
-                <div id="red" class="punto" @click="${function () { this.clickIr('red', 4) }}">
+                <div id="red" class="punto" @click="${this.clickRed}">
                     <div id="redImg" class="imagen"></div>
                     <div id="redTxt" class="texto">NUESTRA RED</div>
                 </div>
@@ -187,9 +187,10 @@ export class principalScreen extends connect(store, MENU_TIMESTAMP, MENU_ERRORGE
             this.update();
         }
         if (name == MENU_TIMESTAMP && this.current == "principal") {
-            if (state.noticia.entities) {
-                store.dispatch(goTo(this.paginaSiguiente));
-            }
+            // if (state.noticia.entities) {
+            //     store.dispatch(goTo(this.paginaSiguiente));
+            // }
+            store.dispatch(get_noticia({ orderby: "id", filter: "Activo" }))
         }
         if (name == NOTICIA_TIMESTAMP && this.current == "principal") {
             if (state.menu.entities) {
@@ -197,24 +198,43 @@ export class principalScreen extends connect(store, MENU_TIMESTAMP, MENU_ERRORGE
             }
         }
         if (name == MENU_ERRORGETTIMESTAMP && this.current == "principal") {
-            this.errorGet = this.errorGet + 1
-            if (this.errorGet == 1) store.dispatch(showWarning(store.getState().screen.name, 0))
+            //            this.errorGet = this.errorGet + 1
+            //            if (this.errorGet == 1) store.dispatch(showWarning(store.getState().screen.name, 0))
+            if (!state.menu.entities || !state.noticia.entities) {
+                store.dispatch(showWarning(store.getState().screen.name, 0))
+            }
         }
         if (name == NOTICIA_ERRORGETTIMESTAMP && this.current == "principal") {
-            this.errorGet = this.errorGet + 1
-            if (this.errorGet == 1) store.dispatch(showWarning(store.getState().screen.name, 0))
+            //            this.errorGet = this.errorGet + 1
+            //            if (this.errorGet == 1) store.dispatch(showWarning(store.getState().screen.name, 0))
+            if (!state.menu.entities || !state.noticia.entities) {
+                store.dispatch(showWarning(store.getState().screen.name, 0))
+            }
         }
     }
 
+    clickGremio() {
+        this.clickIr("gremio", 1);
+    }
+    clickSalud() {
+        this.clickIr("salud", 2);
+    }
+    clickCapacitacion() {
+        this.clickIr("capacitacion", 3);
+    }
+    clickRed() {
+        this.clickIr("red", 4);
+    }
     clickIr(pagina, origen) {
-        store.dispatch(setMenu(pagina, [{ id: 0, idMenu: 0, idNota: 0, origen: origen, web: "" }]))
         this.paginaSiguiente = pagina;
+        store.dispatch(setMenu(pagina, [{ id: 0, idMenu: 0, idNota: 0, origen: origen, web: "" }]))
         if (!store.getState().menu.entities || !store.getState().noticia.entities) {
             this.errorGet = 0
             store.dispatch(get_menu({ orderby: "origen,idMenu,orden", filter: "Activo" }))
-            store.dispatch(get_noticia({ orderby: "id", filter: "Activo" }))
         } else {
+            //if (this.paginaSiguiente != "") {
             store.dispatch(goTo(this.paginaSiguiente));
+            //}
         }
     }
 

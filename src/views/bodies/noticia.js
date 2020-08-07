@@ -142,7 +142,18 @@ export class noticiaScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitEleme
             justify-self:center;
         }
         #nImagen{
-          
+            display:grid;
+            width: 100%;
+            height: 95vw;
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-size:  contain;
+            justify-self: center;
+            opacity:.8;
+        }
+        :host(:not([media-size="small"])) #nImagen{
+            width: 80vh;
+            height: 60vh;
         }
         #nCuerpo{
             font-size: var(--font-bajada-size);
@@ -151,12 +162,11 @@ export class noticiaScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitEleme
             justify-self:center;              
             text-align: justify;
             width:95%;
-            -webkit-user-modify: read-write-plaintext-only;
             background-color:var(--color-gris-oscuro);
             padding: 1rem;
             opacity:.8;
             border-radius: 1rem;
-       }
+        }
         #nLink{
             font-size: var(--font-bajada-size);
             font-weight: var(--font-bajada-weight);              
@@ -175,9 +185,9 @@ export class noticiaScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitEleme
             <div id="noticia">
                 <div style="height:.5rem"></div>
                 <div id="nTitulo">${this.noticia ? this.noticia.titulo : ""}</div>
-                <div id="nImagen"></div>
-                <div id="nCuerpo">${this.noticia ? this.noticia.cuerpo : ""}</div>
+                <div id="nCuerpo"></div>
                 <div id="nLink"  @click=${this.web}>${this.noticia ? this.noticia.descripcionlink : ""}</div>
+                <div id="nImagen"></div>
                 <div style="height:.5rem"></div>
             </div>
         </div>
@@ -203,11 +213,28 @@ export class noticiaScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitEleme
                 if (this.shadowRoot.querySelector("#nTitulo").innerHTML == "") {
                     this.shadowRoot.querySelector("#nTitulo").style.display = "none"
                 }
-                if (this.shadowRoot.querySelector("#nImagen").innerHTML == "") {
-                    this.shadowRoot.querySelector("#nImagen").style.display = "none"
+                var imagen = ""
+                if (this.noticia) {
+                    if (this.noticia.imagen.trim().length > 0) {
+                        imagen = this.noticia.imagen.trim()
+                    }
                 }
-                if (this.shadowRoot.querySelector("#nCuerpo").innerHTML == "") {
+                if (imagen == "") {
+                    this.shadowRoot.querySelector("#nImagen").style.display = "none"
+                } else {
+                    this.shadowRoot.getElementById("nImagen").style.backgroundImage = "url('" + imagen + "')";
+                }
+                var strin = ""
+                if (this.noticia) {
+                    if (this.noticia.cuerpo.trim().length > 0) {
+                        strin = '<div id="nCuerpo">'
+                        strin = strin + this.noticia.cuerpo.trim() + "</div>"
+                    }
+                }
+                if (strin == "") {
                     this.shadowRoot.querySelector("#nCuerpo").style.display = "none"
+                } else {
+                    this.shadowRoot.querySelector("#nCuerpo").outerHTML = strin
                 }
                 if (this.shadowRoot.querySelector("#nLink").innerHTML == "") {
                     this.shadowRoot.querySelector("#nLink").style.display = "none"

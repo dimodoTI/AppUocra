@@ -50,6 +50,11 @@ export const screenLayuts = {
         medium: ALL_BODY,
         large: ALL_BODY
     },
+    pantallahorizontal: {
+        small: ALL_BODY,
+        medium: ALL_BODY,
+        large: ALL_BODY
+    },
     cardA: {
         small: {
             portrait: HEADER_BODY,

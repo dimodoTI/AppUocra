@@ -1,8 +1,8 @@
-<html lang="en">
+<html lang="es" style="translate:'no'">
 
 <head>
     <title>U.O.C.R.A.</title>
-    <meta charset="UTF-8">
+    <meta charset=" UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport"
         content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
@@ -10,6 +10,7 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 
     <link rel="icon" href="https://www.uocra.net/AppUOCRA/icon-iphone.png">
     <link rel="apple-touch-icon" href="https://www.uocra.net/AppUOCRA/icon-iphone.png">
@@ -28,22 +29,40 @@
 
 
     <style>
+        #snackbarFondo {
+            position: absolute;
+            display: none;
+            background-color: var(--color-negro);
+            color: rgb(0, 0, 0);
+            padding: 1.5rem;
+            z-index: 900;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            opacity: .5;
+        }
+
         #snackbar {
             position: absolute;
-            visibility: hidden;
+            display: none;
             background-color: rgb(238, 255, 143);
             color: rgb(0, 0, 0);
-            border-radius: 4px;
             padding: 1.5rem;
             z-index: 1000;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: -10rem;
+            left: 1rem;
+            right: 1rem;
+            bottom: 3rem;
+            border-radius: 1rem;
+            text-align: center;
         }
 
         #snackbar.show {
-            bottom: 1rem;
-            visibility: visible;
+            display: grid;
+        }
+
+        #snackbarFondo.show {
+            display: grid;
         }
 
         a {
@@ -58,6 +77,8 @@
 
 <body>
     <view-manager></view-manager>
+    <div id="snackbarFondo">
+    </div>
     <div id="snackbar">Una nueva versión esta disponible. Presione <a id="reload">Aqui</a> para actualizar.
     </div>
 </body>
@@ -77,23 +98,19 @@
 
 <script>
 
-    // if ('serviceWorker' in navigator) {
-    //     window.addEventListener('load', () => {
-    //         navigator.serviceWorker.register('service-worker.js')
-    //             .then(registration => {
-    //                 console.log('Service Worker is registered', registration);
-    //             })
-    //             .catch(err => {
-    //                 console.error('Registration failed:', err);
-    //             });
-    //     });
-    // }
-
-
     let newWorker;
-
-    //The click event on the pop up notification
-    document.getElementById('reload').addEventListener('click', function () {
+    function showUpdateBar() {
+        let snackbar = document.getElementById('snackbar');
+        let snackbarFondo = document.getElementById('snackbarFondo');
+        snackbar.className = 'show';
+        snackbarFondo.className = 'show';
+    }
+    // The click event on the pop up notification
+    document.getElementById('snackbar').addEventListener('click', function () {
+        let snackbar = document.getElementById('snackbar');
+        let snackbarFondo = document.getElementById('snackbarFondo');
+        snackbar.classList.remove('show');
+        snackbarFondo.classList.remove('show');
         newWorker.postMessage({
             action: 'skipWaiting'
         });
