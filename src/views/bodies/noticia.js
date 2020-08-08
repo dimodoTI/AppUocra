@@ -101,6 +101,7 @@ export class noticiaScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitEleme
             background-repeat: no-repeat;
             background-position: center;
             background-size:  6vh;
+            cursor: pointer;
         }
         :host([estilo="salud"]) #atras{
             background-image:var(--imagen-atras-salud);
@@ -172,6 +173,7 @@ export class noticiaScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitEleme
             font-weight: var(--font-bajada-weight);              
             text-align: left;
             text-decoration: underline;
+            cursor: pointer;
         }
         `
     }

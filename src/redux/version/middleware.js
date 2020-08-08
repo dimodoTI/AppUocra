@@ -18,7 +18,7 @@ import {
 } from "./actions";
 
 import {
-    OdataMenuFetch
+    OdataVersionFetch
 } from "../fetchs"
 
 import {
@@ -30,7 +30,7 @@ export const get = ({
 }) => next => action => {
     next(action);
     if (action.type === GET) {
-        dispatch(apiRequest(OdataMenuFetch, action.options, GET_SUCCESS, GET_ERROR))
+        dispatch(apiRequest(OdataVersionFetch, action.options, GET_SUCCESS, GET_ERROR))
     }
 };
 

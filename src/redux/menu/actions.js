@@ -4,6 +4,7 @@ export const PATCH = "[menu] PATCH";
 export const UPDATE = "[menu] UPDATE";
 export const REMOVE = "[menu] REMOVE";
 export const EDIT = "[menu] EDIT"
+export const SET = "[menu] SET"
 
 
 export const GET_SUCCESS = "[menu] GET success";
@@ -20,10 +21,14 @@ export const REMOVE_ERROR = "[menu] REMOVE error";
 
 
 
-
 export const get = (options) => ({
     type: GET,
     options: options
+});
+
+export const set = (entity) => ({
+    type: SET,
+    entity: entity
 });
 
 export const add = (body, token) => ({

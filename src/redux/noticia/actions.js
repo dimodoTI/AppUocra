@@ -4,7 +4,7 @@ export const PATCH = "[noticia] PATCH";
 export const UPDATE = "[noticia] UPDATE";
 export const REMOVE = "[noticia] REMOVE";
 export const EDIT = "[noticia] EDIT"
-
+export const SET = "[noticia] SET"
 
 export const GET_SUCCESS = "[noticia] GET success";
 export const ADD_SUCCESS = "[noticia] ADD success";
@@ -24,6 +24,11 @@ export const REMOVE_ERROR = "[noticia] REMOVE error";
 export const get = (options) => ({
     type: GET,
     options: options
+});
+
+export const set = (entity) => ({
+    type: SET,
+    entity: entity
 });
 
 export const add = (body, token) => ({

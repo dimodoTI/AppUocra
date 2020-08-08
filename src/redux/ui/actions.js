@@ -62,5 +62,5 @@ export const setMediaOrientation = (orientation) => ({
 export const setMenu = (estilo, items) => ({
   type: SET_MENU,
   estilo: estilo,
-  items, items
+  items: items
 });

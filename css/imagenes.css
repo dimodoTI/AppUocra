@@ -12,10 +12,10 @@ html {
     --imagen-salud: url("../assets/images/salud.gif");
     --imagen-capacitacion: url("../assets/images/capacitacion.gif");
     --imagen-red: url("../assets/images/red.gif");
-    --imagen-atras-gremio: url("../assets/images/atras_gremio.png");
-    --imagen-atras-salud: url("../assets/images/atras_salud.png");
-    --imagen-atras-capacitacion: url("../assets/images/atras_capacitacion.png");
-    --imagen-atras-red: url("../assets/images/atras_red.png");
+    --imagen-atras-gremio: url("../assets/images/atras_gremio.gif");
+    --imagen-atras-salud: url("../assets/images/atras_salud.gif");
+    --imagen-atras-capacitacion: url("../assets/images/atras_capacitacion.gif");
+    --imagen-atras-red: url("../assets/images/atras_red.gif");
     --imagen-cabecera-uocra: url("../assets/images/cabecera_uocra.gif");
     --imagen-cabecera-salud: url("../assets/images/cabecera_salud.gif");
     --imagen-cabecera-capacitacion: url("../assets/images/cabecera_capacitacion.gif");

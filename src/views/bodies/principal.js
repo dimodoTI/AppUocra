@@ -16,11 +16,14 @@ import {
     isInLayout
 } from "../../redux/screens/screenLayouts";
 import {
-    get as get_menu
+    get as get_menu, set as set_menu
 } from "../../redux/menu/actions"
 import {
-    get as get_noticia
+    get as get_noticia, set as set_noticia
 } from "../../redux/noticia/actions"
+import {
+    get as get_version, set as set_version
+} from "../../redux/version/actions"
 import { showWarning, setMenu } from "../../redux/ui/actions";
 
 
@@ -28,15 +31,16 @@ const MENU_TIMESTAMP = "menu.timeStamp"
 const MENU_ERRORGETTIMESTAMP = "menu.errorTimeStamp"
 const NOTICIA_TIMESTAMP = "noticia.timeStamp"
 const NOTICIA_ERRORGETTIMESTAMP = "noticia.errorTimeStamp"
+const VERSION_TIMESTAMP = "version.timeStamp"
+const VERSION_ERRORGETTIMESTAMP = "version.errorTimeStamp"
 const MEDIA_CHANGE = "ui.media.timeStamp"
 const SCREEN = "screen.timeStamp";
-export class principalScreen extends connect(store, MENU_TIMESTAMP, MENU_ERRORGETTIMESTAMP, NOTICIA_TIMESTAMP, NOTICIA_ERRORGETTIMESTAMP, MEDIA_CHANGE, SCREEN)(LitElement) {
+export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_ERRORGETTIMESTAMP, MENU_TIMESTAMP, MENU_ERRORGETTIMESTAMP, NOTICIA_TIMESTAMP, NOTICIA_ERRORGETTIMESTAMP, MEDIA_CHANGE, SCREEN)(LitElement) {
     constructor() {
         super();
         this.hidden = true
         this.area = "body"
         this.current = ""
-        this.paginaSiguiente = ""
         this.errorGet = 0
     }
 
@@ -102,7 +106,7 @@ export class principalScreen extends connect(store, MENU_TIMESTAMP, MENU_ERRORGE
             display:grid;
             position:relative;
             grid-template-rows: 90% 10%;
-            grid-gap:2vh
+            grid-gap:2vh;
         }
         :host([media-size="large"]) .punto{
             grid-template-rows: 25vw auto;        
@@ -112,6 +116,7 @@ export class principalScreen extends connect(store, MENU_TIMESTAMP, MENU_ERRORGE
             font-weight: var(--font-label-weight);
             color: var(--color-blanco);
             justify-self:center;
+            cursor: pointer;
         }
         :host([media-size="large"]) .texto{
             font-size: 1.5vw;
@@ -122,6 +127,7 @@ export class principalScreen extends connect(store, MENU_TIMESTAMP, MENU_ERRORGE
             background-repeat: no-repeat;
             background-position: bottom;
             background-size:  20vh;           
+            cursor: pointer;
         }
         :host([media-size="large"]) .imagen{
             background-size:  18vw;           
@@ -143,27 +149,27 @@ export class principalScreen extends connect(store, MENU_TIMESTAMP, MENU_ERRORGE
     }
     render() {
         return html`
-        <div id="cuerpo" @click=${this.proximo}>
+        <div id="cuerpo">
             <div id="titulo"></div>
             <div >
                 <hr id="linea" />
             </div>
             <div id="contenido">
-                <div id="uocra" class="punto" @click="${this.clickGremio}">
-                    <div id="uocraImg" class="imagen">.</div>
-                    <div id="uocraTxt" class="texto">MI GREMIO</div>
+                <div id="uocra" class="punto" >
+                    <div id="uocraImg" class="imagen" @click="${this.clickGremio}">.</div>
+                    <div id="uocraTxt" class="texto" @click="${this.clickGremio}">MI GREMIO</div>
                 </div>
-                <div id="salud" class="punto" @click="${this.clickSalud}">
-                    <div id="saludImg" class="imagen"></div>
-                    <div id="saludTxt" class="texto">CONSTRUIR SALUD</div>
+                <div id="salud" class="punto">
+                    <div id="saludImg" class="imagen" @click="${this.clickSalud}"></div>
+                    <div id="saludTxt" class="texto" @click="${this.clickSalud}">CONSTRUIR SALUD</div>
                 </div>
-                <div id="capacitacion" class="punto" @click="${this.clickCapacitacion}">
-                    <div id="capacitacionImg" class="imagen"></div>
-                    <div id="capacitacionTxt" class="texto">CAPACITACION Y CULTURA</div>
+                <div id="capacitacion" class="punto">
+                    <div id="capacitacionImg" class="imagen" @click="${this.clickCapacitacion}"></div>
+                    <div id="capacitacionTxt" class="texto" @click="${this.clickCapacitacion}">CAPACITACION Y CULTURA</div>
                 </div>
-                <div id="red" class="punto" @click="${this.clickRed}">
-                    <div id="redImg" class="imagen"></div>
-                    <div id="redTxt" class="texto">NUESTRA RED</div>
+                <div id="red" class="punto">
+                    <div id="redImg" class="imagen" @click="${this.clickRed}"></div>
+                    <div id="redTxt" class="texto" @click="${this.clickRed}">NUESTRA RED</div>
                 </div>
             </div>
             <div>
@@ -186,27 +192,59 @@ export class principalScreen extends connect(store, MENU_TIMESTAMP, MENU_ERRORGE
             }
             this.update();
         }
+        if (name == VERSION_TIMESTAMP && this.current == "principal") {
+            if (localStorage.getItem("version") == null) {
+                localStorage.setItem("version", JSON.stringify(state.version.entities));
+            }
+            let sVersion = JSON.parse(localStorage.getItem("version"));
+            if (sVersion[0].numero != state.version.entities[0].numero) {
+                localStorage.clear();
+                localStorage.setItem("version", JSON.stringify(state.version.entities));
+                store.dispatch(get_menu({ orderby: "origen,idMenu,orden", filter: "Activo" }))
+            } else {
+                let sMenu = JSON.parse(localStorage.getItem("menu"));
+                if (sMenu != null) {
+                    store.dispatch(set_menu(sMenu))
+                } else {
+                    store.dispatch(get_menu({ orderby: "origen,idMenu,orden", filter: "Activo" }))
+                }
+            }
+        }
+        if (name == VERSION_ERRORGETTIMESTAMP && this.current == "principal") {
+            let sMenu = localStorage.getItem("menu");
+            let sNoticia = localStorage.getItem("noticia");
+            if (sMenu != null && sNoticia != null) {
+                store.dispatch(set_menu(JSON.parse(sMenu)))
+            } else {
+                store.dispatch(showWarning(store.getState().screen.name, 0))
+            }
+        }
+
         if (name == MENU_TIMESTAMP && this.current == "principal") {
-            // if (state.noticia.entities) {
-            //     store.dispatch(goTo(this.paginaSiguiente));
-            // }
-            store.dispatch(get_noticia({ orderby: "id", filter: "Activo" }))
+            if (localStorage.getItem("menu") == null) {
+                localStorage.setItem("menu", JSON.stringify(state.menu.entities));
+            }
+            let sNoticia = localStorage.getItem("noticia");
+            if (sNoticia != null) {
+                store.dispatch(set_noticia(JSON.parse(sNoticia)))
+            } else {
+                store.dispatch(get_noticia({ orderby: "id", filter: "Activo" }))
+            }
         }
         if (name == NOTICIA_TIMESTAMP && this.current == "principal") {
+            if (localStorage.getItem("noticia") == null) {
+                localStorage.setItem("noticia", JSON.stringify(state.noticia.entities));
+            }
             if (state.menu.entities) {
-                store.dispatch(goTo(this.paginaSiguiente));
+                store.dispatch(goTo(state.ui.menu.estilo));
             }
         }
         if (name == MENU_ERRORGETTIMESTAMP && this.current == "principal") {
-            //            this.errorGet = this.errorGet + 1
-            //            if (this.errorGet == 1) store.dispatch(showWarning(store.getState().screen.name, 0))
             if (!state.menu.entities || !state.noticia.entities) {
                 store.dispatch(showWarning(store.getState().screen.name, 0))
             }
         }
         if (name == NOTICIA_ERRORGETTIMESTAMP && this.current == "principal") {
-            //            this.errorGet = this.errorGet + 1
-            //            if (this.errorGet == 1) store.dispatch(showWarning(store.getState().screen.name, 0))
             if (!state.menu.entities || !state.noticia.entities) {
                 store.dispatch(showWarning(store.getState().screen.name, 0))
             }
@@ -226,15 +264,12 @@ export class principalScreen extends connect(store, MENU_TIMESTAMP, MENU_ERRORGE
         this.clickIr("red", 4);
     }
     clickIr(pagina, origen) {
-        this.paginaSiguiente = pagina;
         store.dispatch(setMenu(pagina, [{ id: 0, idMenu: 0, idNota: 0, origen: origen, web: "" }]))
         if (!store.getState().menu.entities || !store.getState().noticia.entities) {
             this.errorGet = 0
-            store.dispatch(get_menu({ orderby: "origen,idMenu,orden", filter: "Activo" }))
+            store.dispatch(get_version({}))
         } else {
-            //if (this.paginaSiguiente != "") {
-            store.dispatch(goTo(this.paginaSiguiente));
-            //}
+            store.dispatch(goTo(store.getState().ui.menu.estilo));
         }
     }
 

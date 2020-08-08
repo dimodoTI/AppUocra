@@ -9,7 +9,8 @@ import {
     ADD_ERROR,
     REMOVE_SUCCESS,
     REMOVE_ERROR,
-    EDIT
+    EDIT,
+    SET
 } from "./actions";
 
 
@@ -32,6 +33,10 @@ export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_SUCCESS:
             newState.entities = action.payload.receive
+            newState.timeStamp = (new Date()).getTime();
+            break;
+        case SET:
+            newState.entities = action.entity
             newState.timeStamp = (new Date()).getTime();
             break;
         case EDIT:

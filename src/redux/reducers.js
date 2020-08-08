@@ -16,6 +16,9 @@ import {
 import {
   reducer as apiReducer
 } from "./api/reducer"
+import {
+  reducer as versionReducer
+} from "./version/reducer"
 
 export const rootReducer = (state = {}, action) => {
   return {
@@ -24,6 +27,7 @@ export const rootReducer = (state = {}, action) => {
     routing: routingReducer(state.routing, action),
     menu: menuReducer(state.menu, action),
     noticia: noticiaReducer(state.noticia, action),
-    api: apiReducer(state.api, action)
+    api: apiReducer(state.api, action),
+    version: versionReducer(state.version, action)
   }
 }

@@ -100,6 +100,7 @@ export class menuScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElement)
             background-repeat: no-repeat;
             background-position: center;
             background-size:  6vh;
+            cursor: pointer;
         }
 
         :host([current="salud"]) #atras{

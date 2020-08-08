@@ -14,6 +14,7 @@ export const cardMenu = css`
             align-items: center;
             border-radius: .4rem;  
             opacity:.7;
+            cursor: pointer;
         }
         #ciDivIcomo{
             justify-self: center;

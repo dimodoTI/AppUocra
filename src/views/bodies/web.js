@@ -102,6 +102,7 @@ export class webScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElement) 
             background-repeat: no-repeat;
             background-position: center;
             background-size:  6vh;
+            cursor: pointer;
         }
         :host([estilo="salud"]) #atras{
             background-image:var(--imagen-atras-salud);

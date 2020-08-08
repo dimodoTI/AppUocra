@@ -80,7 +80,7 @@ export class pantallaHorizontalScreen extends connect(store, MEDIA_CHANGE, SCREE
             this.mediaSize = state.ui.media.size
             this.orientation = state.ui.media.orientation
             this.hidden = true
-            if (window.orientation == 90 || window.orientation == -90) {
+            if (this.orientation == "landscape" && ((typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1))) {
                 this.hidden = false
             }
             this.update();
