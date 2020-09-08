@@ -1,0 +1,23 @@
+{
+  "short_name": "U.O.C.R.A.",
+  "name": "U.O.C.R.A.",
+  "description": "",
+  "icons": [
+    {
+      "src": "/splash192_96.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/splash512_96.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "scope": "./",
+  "theme_color": "#ffffff",
+  "orientation": "portrait"
+}

@@ -1,76 +1,78 @@
-<html lang="es" style="translate:'no'">
+<html translate="no"">
 
 <head>
     <title>U.O.C.R.A.</title>
     <meta charset=" UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport"
-        content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
-    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport"
+    content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+<meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
 
-    <link rel="icon" href="https://www.uocra.net/AppUOCRA/icon-iphone.png">
-    <link rel="apple-touch-icon" href="https://www.uocra.net/AppUOCRA/icon-iphone.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="https://www.uocra.net/AppUOCRA/icon-ipad.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://www.uocra.net/AppUOCRA/icon-retina.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="https://www.uocra.net/AppUOCRA/icon-ipadretina.png">
-    <meta name="apple-mobile-web-app-title" content="U.O.C.R.A.">
-    <meta name="mobile-web-app-capable" content="yes" />
-    <link rel="apple-touch-startup-image" href="launch-640x1136.png"
-        media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
-    <link rel="apple-touch-startup-image" href="launch-750x1294.png"
-        media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="icon" href="https://www.uocra.net/AppUOCRA/icon-iphone.png">
+<link rel="apple-touch-icon" href="https://www.uocra.net/AppUOCRA/icon-iphone.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.uocra.net/AppUOCRA/icon-ipad.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.uocra.net/AppUOCRA/icon-retina.png">
+<link rel="apple-touch-icon" sizes="167x167" href="https://www.uocra.net/AppUOCRA/icon-ipadretina.png">
+<meta name="apple-mobile-web-app-title" content="U.O.C.R.A.">
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="apple-touch-startup-image" href="launch-640x1136.png"
+    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<link rel="apple-touch-startup-image" href="launch-750x1294.png"
+    media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-touch-fullscreen" content="yes">
 
-    <link rel="manifest" crossorigin="use-credentials" href="manifest.txt" />
-    <meta name="apple-touch-fullscreen" content="yes">
+<link rel="manifest" crossorigin="use-credentials" href="manifest.txt" />
 
 
-    <style>
-        #snackbarFondo {
-            position: absolute;
-            display: none;
-            background-color: var(--color-negro);
-            color: rgb(0, 0, 0);
-            padding: 1.5rem;
-            z-index: 900;
-            left: 0;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            opacity: .5;
-        }
+<style>
+    #snackbarFondo {
+        position: absolute;
+        display: none;
+        background-color: var(--color-negro);
+        color: rgb(0, 0, 0);
+        padding: 1.5rem;
+        z-index: 900;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        opacity: .5;
+    }
 
-        #snackbar {
-            position: absolute;
-            display: none;
-            background-color: rgb(238, 255, 143);
-            color: rgb(0, 0, 0);
-            padding: 1.5rem;
-            z-index: 1000;
-            left: 1rem;
-            right: 1rem;
-            bottom: 3rem;
-            border-radius: 1rem;
-            text-align: center;
-        }
+    #snackbar {
+        position: absolute;
+        display: none;
+        background-color: rgb(238, 255, 143);
+        color: rgb(0, 0, 0);
+        padding: 1.5rem;
+        z-index: 1000;
+        left: 1rem;
+        right: 1rem;
+        bottom: 3rem;
+        border-radius: 1rem;
+        text-align: center;
+    }
 
-        #snackbar.show {
-            display: grid;
-        }
+    #snackbar.show {
+        display: grid;
+    }
 
-        #snackbarFondo.show {
-            display: grid;
-        }
+    #snackbarFondo.show {
+        display: grid;
+    }
 
-        a {
-            color: #0a488f;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    </style>
+    a {
+        color: #0a488f;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
 
 </head>
 
@@ -87,17 +89,9 @@
     document.addEventListener('focusout', function (e) {
         window.scrollTo(0, 0)
     });
-
-    // document.body.addEventListener('touchmove', function (event) {
-    //     event.preventDefault();
-    // }, {
-    //     passive: false,
-    //     useCapture: false
-    // });
 </script>
 
 <script>
-
     let newWorker;
     function showUpdateBar() {
         let snackbar = document.getElementById('snackbar');

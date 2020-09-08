@@ -1,4 +1,4 @@
-const cacheName = 'Version8';
+const cacheName = 'Version6';
 const enCache = [
     "./index.html",
     "./splash512_72.png",

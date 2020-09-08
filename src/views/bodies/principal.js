@@ -41,7 +41,6 @@ export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_E
         this.hidden = true
         this.area = "body"
         this.current = ""
-        this.errorGet = 0
     }
 
     static get styles() {
@@ -129,13 +128,21 @@ export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_E
             background-size:  20vh;           
             cursor: pointer;
         }
+        .imagen:active{
+            -webkit-tap-highlight-color: transparent;
+            background-size:  24vh;           
+        }
         :host([media-size="large"]) .imagen{
             background-size:  18vw;           
             background-position: center;
         }
+        :host([media-size="large"]) .imagen:active{
+            background-size:  20vw;           
+       }
         #uocraImg{
             background-image:var(--imagen-gremio);
         }
+
         #saludImg{
             background-image:var(--imagen-salud);
         }
@@ -155,21 +162,21 @@ export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_E
                 <hr id="linea" />
             </div>
             <div id="contenido">
-                <div id="uocra" class="punto" >
-                    <div id="uocraImg" class="imagen" @click="${this.clickGremio}">.</div>
-                    <div id="uocraTxt" class="texto" @click="${this.clickGremio}">MI GREMIO</div>
+                <div id="uocra" class="punto" @click="${this.clickGremio}">
+                    <div id="uocraImg" class="imagen" >.</div>
+                    <div id="uocraTxt" class="texto" >MI SINDICATO</div>
                 </div>
-                <div id="salud" class="punto">
-                    <div id="saludImg" class="imagen" @click="${this.clickSalud}"></div>
-                    <div id="saludTxt" class="texto" @click="${this.clickSalud}">CONSTRUIR SALUD</div>
+                <div id="salud" class="punto" @click="${this.clickSalud}">
+                    <div id="saludImg" class="imagen" ></div>
+                    <div id="saludTxt" class="texto">CONSTRUIR SALUD</div>
                 </div>
-                <div id="capacitacion" class="punto">
-                    <div id="capacitacionImg" class="imagen" @click="${this.clickCapacitacion}"></div>
-                    <div id="capacitacionTxt" class="texto" @click="${this.clickCapacitacion}">CAPACITACION Y CULTURA</div>
+                <div id="capacitacion" class="punto" @click="${this.clickCapacitacion}">
+                    <div id="capacitacionImg" class="imagen"></div>
+                    <div id="capacitacionTxt" class="texto">CAPACITACION Y CULTURA</div>
                 </div>
-                <div id="red" class="punto">
-                    <div id="redImg" class="imagen" @click="${this.clickRed}"></div>
-                    <div id="redTxt" class="texto" @click="${this.clickRed}">NUESTRA RED</div>
+                <div id="red" class="punto" @click="${this.clickRed}">
+                    <div id="redImg" class="imagen"></div>
+                    <div id="redTxt" class="texto">NUESTRA RED</div>
                 </div>
             </div>
             <div>
@@ -193,11 +200,11 @@ export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_E
             this.update();
         }
         if (name == VERSION_TIMESTAMP && this.current == "principal") {
-            if (localStorage.getItem("version") == null) {
-                localStorage.setItem("version", JSON.stringify(state.version.entities));
-            }
-            let sVersion = JSON.parse(localStorage.getItem("version"));
-            if (sVersion[0].numero != state.version.entities[0].numero) {
+            // if (localStorage.getItem("version") == null) {
+            //     localStorage.setItem("version", JSON.stringify(state.version.entities));
+            // }
+            //let sVersion = JSON.parse(localStorage.getItem("version"));
+            if (localStorage.getItem("version") == null || JSON.parse(localStorage.getItem("version"))[0].numero != state.version.entities[0].numero) {
                 localStorage.clear();
                 localStorage.setItem("version", JSON.stringify(state.version.entities));
                 store.dispatch(get_menu({ orderby: "origen,idMenu,orden", filter: "Activo" }))
@@ -266,7 +273,6 @@ export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_E
     clickIr(pagina, origen) {
         store.dispatch(setMenu(pagina, [{ id: 0, idMenu: 0, idNota: 0, origen: origen, web: "" }]))
         if (!store.getState().menu.entities || !store.getState().noticia.entities) {
-            this.errorGet = 0
             store.dispatch(get_version({}))
         } else {
             store.dispatch(goTo(store.getState().ui.menu.estilo));
