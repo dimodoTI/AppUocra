@@ -10,6 +10,7 @@ import {
 const webApiMenuOdata = "https://www.uocra.net/appuocra"
 const webApiNoticiaOdata = "https://www.uocra.net/appuocra"
 const webApiVersionOdata = "https://www.uocra.net/appuocra"
+const webApiMotifiOdata = "https://www.uocra.net/appuocra"
 
 const menuOdata = ODataFetchFactory({
   fetch: fetch,
@@ -23,7 +24,12 @@ const versionOdata = ODataFetchFactory({
   fetch: fetch,
   domain: webApiVersionOdata
 })
+const notifiOdata = ODataFetchFactory({
+  fetch: fetch,
+  domain: webApiMotifiOdata
+})
 
 export const OdataMenuFetch = ODataEntity(menuOdata, "Menu")
 export const OdataNoticiaFetch = ODataEntity(noticiaOdata, "Noticias")
 export const OdataVersionFetch = ODataEntity(versionOdata, "Version")
+export const OdataNotifiFetch = ODataEntity(notifiOdata, "Notificaciones")

@@ -163,9 +163,9 @@ export class noticiaScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitEleme
             justify-self:center;              
             text-align: justify;
             width:95%;
-            background-color:var(--color-gris-oscuro);
+            background-color: rgba(21, 21, 21, .7) ;
             padding: 1rem;
-            opacity:.8;
+            opacity:1;
             border-radius: 1rem;
         }
         #nLink{
@@ -181,14 +181,14 @@ export class noticiaScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitEleme
         return html`
         <div id="cuerpo">
             <div id="titulo">
-                <div id="atras"  @click=${this.atras}></div>
+                <div id="atras" @click=${this.atras}></div>
                 <div id="texto"></div>
             </div>
             <div id="noticia">
                 <div style="height:.5rem"></div>
                 <div id="nTitulo">${this.noticia ? this.noticia.titulo : ""}</div>
                 <div id="nCuerpo"></div>
-                <div id="nLink"  @click=${this.web}>${this.noticia ? this.noticia.descripcionlink : ""}</div>
+                <div id="nLink" @click=${this.web}>${this.noticia ? this.noticia.descripcionlink : ""}</div>
                 <div id="nImagen"></div>
                 <div style="height:.5rem"></div>
             </div>

@@ -9,8 +9,9 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
-<meta http-equiv="ScreenOrientation" content="autoRotate:disabled">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Quicksand" rel='stylesheet'>
+<meta http-equiv=" ScreenOrientation" content="autoRotate:disabled">
 
 <link rel="icon" href="https://www.uocra.net/AppUOCRA/icon-iphone.png">
 <link rel="apple-touch-icon" href="https://www.uocra.net/AppUOCRA/icon-iphone.png">
@@ -84,6 +85,7 @@
     <div id="snackbar">Una nueva versión esta disponible. Presione <a id="reload">Aqui</a> para actualizar.
     </div>
 </body>
+
 <script>
     window.scrollTo(0, 0)
     document.addEventListener('focusout', function (e) {
@@ -111,7 +113,8 @@
     });
 
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('Service-worker.js').then(reg => {
+        //navigator.serviceWorker.register('Service-worker.js').then(reg => {
+        navigator.serviceWorker.register('./Service-worker.js').then(reg => {
             reg.addEventListener('updatefound', () => {
                 // A wild service worker has appeared in reg.installing!
                 newWorker = reg.installing;

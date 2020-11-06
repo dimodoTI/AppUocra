@@ -28,7 +28,7 @@ export const reducer = (state = initialState, action) => {
     const newState = {
         ...state
     };
-
+ 
     switch (action.type) {
         case GET_SUCCESS:
             newState.entities = action.payload.receive

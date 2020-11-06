@@ -24,18 +24,27 @@ import {
 import {
     get as get_version, set as set_version
 } from "../../redux/version/actions"
+import {
+    getNotificacion as get_notifi
+} from "../../redux/notifi/actions"
 import { showWarning, setMenu } from "../../redux/ui/actions";
+import { prendeNotificacion, apagaNotificacion } from "../../redux/notifi/actions";
 
 
 const MENU_TIMESTAMP = "menu.timeStamp"
 const MENU_ERRORGETTIMESTAMP = "menu.errorTimeStamp"
 const NOTICIA_TIMESTAMP = "noticia.timeStamp"
 const NOTICIA_ERRORGETTIMESTAMP = "noticia.errorTimeStamp"
+const NOTIFI_TIMESTAMP = "notifi.entityNotificacionesTimeStamp"
+const NOTIFI_ERRORGETTIMESTAMP = "notifi.entityNotificacionesErrorTimeStamp"
 const VERSION_TIMESTAMP = "version.timeStamp"
 const VERSION_ERRORGETTIMESTAMP = "version.errorTimeStamp"
 const MEDIA_CHANGE = "ui.media.timeStamp"
 const SCREEN = "screen.timeStamp";
-export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_ERRORGETTIMESTAMP, MENU_TIMESTAMP, MENU_ERRORGETTIMESTAMP, NOTICIA_TIMESTAMP, NOTICIA_ERRORGETTIMESTAMP, MEDIA_CHANGE, SCREEN)(LitElement) {
+const PRENDE_NOTIFICACION = "notifi.prendeNotificacionTimeStamp";
+const APAGA_NOTIFICACION = "notifi.apagaNotificacionTimeStamp";
+
+export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERRORGETTIMESTAMP, PRENDE_NOTIFICACION, APAGA_NOTIFICACION, VERSION_TIMESTAMP, VERSION_ERRORGETTIMESTAMP, MENU_TIMESTAMP, MENU_ERRORGETTIMESTAMP, NOTICIA_TIMESTAMP, NOTICIA_ERRORGETTIMESTAMP, MEDIA_CHANGE, SCREEN)(LitElement) {
     constructor() {
         super();
         this.hidden = true
@@ -82,10 +91,15 @@ export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_E
         }
         #notificacion{
             height:100%;
-            background-image:var(--imagen-campana-notificacion);
+            background-image:var(--imagen-campana);
             background-repeat: no-repeat;
             background-position: bottom;
             background-size:  6vh;
+            cursor: pointer;
+        }
+        #notificacion[si]{
+            background-image:var(--imagen-campana-notificacion);
+            cursor: pointer;
         }
         #contenido{
             display:grid;
@@ -182,7 +196,7 @@ export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_E
             <div>
                 <hr id="linea" />
             </div>
-            <div id="notificacion"></div>
+            <div id="notificacion"  @click="${this.notif}"></div>
         </div>
         `
     }
@@ -256,8 +270,24 @@ export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_E
                 store.dispatch(showWarning(store.getState().screen.name, 0))
             }
         }
+        if (name == NOTIFI_TIMESTAMP && this.current == "principal") {
+            store.dispatch(goTo("notificacion"));
+        }
+        if (name == NOTIFI_ERRORGETTIMESTAMP) {
+            store.dispatch(apagaNotificacion())
+            store.dispatch(showWarning(store.getState().screen.name, 0))
+        }
+        if (name == PRENDE_NOTIFICACION) {
+            this.shadowRoot.querySelector("#notificacion").setAttribute("si", "")
+        }
+        if (name == APAGA_NOTIFICACION) {
+            this.shadowRoot.querySelector("#notificacion").removeAttribute("si")
+        }
     }
 
+    notif() {
+        store.dispatch(get_notifi({filter: "FechaPublicacion ge " + store.getState().notifi.fechaDesdeGet}, store.getState().notifi.fechaDesdeGet));
+    }
     clickGremio() {
         this.clickIr("gremio", 1);
     }
@@ -278,7 +308,6 @@ export class principalScreen extends connect(store, VERSION_TIMESTAMP, VERSION_E
             store.dispatch(goTo(store.getState().ui.menu.estilo));
         }
     }
-
     static get properties() {
         return {
             mediaSize: {

@@ -44,7 +44,9 @@ import {
 import {
     pantallaHorizontalScreen
 } from "./bodies/pantallaHorizontal"
-
+import {
+    notificacionScreen
+} from "./bodies/notificacion"
 
 const MEDIA_CHANGE = "ui.media.timeStamp"
 const SCREEN = "screen.timeStamp";
@@ -83,6 +85,7 @@ export class viewManager extends connect(store, MEDIA_CHANGE, SCREEN)(LitElement
             <menu-screen class="body"></menu-screen>
             <noticia-screen class="body"></noticia-screen>
             <web-screen class="body"></web-screen>
+            <notificacion-screen class="body"></notificacion-screen>
 
             <pantalla-horizontal-screen  class="body"></pantalla-horizontal-screen>
             <pantalla-warning ></pantalla-warning>

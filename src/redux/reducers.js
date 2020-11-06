@@ -19,6 +19,9 @@ import {
 import {
   reducer as versionReducer
 } from "./version/reducer"
+import {
+  reducer as notifiReducer
+} from "./notifi/reducer"
 
 export const rootReducer = (state = {}, action) => {
   return {
@@ -28,6 +31,7 @@ export const rootReducer = (state = {}, action) => {
     menu: menuReducer(state.menu, action),
     noticia: noticiaReducer(state.noticia, action),
     api: apiReducer(state.api, action),
-    version: versionReducer(state.version, action)
+    version: versionReducer(state.version, action),
+    notifi: notifiReducer(state.notifi, action),
   }
 }

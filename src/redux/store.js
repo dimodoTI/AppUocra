@@ -30,6 +30,10 @@ import {
 import {
   middleware as version
 } from "./version/middleware";
+import {
+  middleware as notifi
+} from "./notifi/middleware";
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 let mdw = [
@@ -39,7 +43,8 @@ let mdw = [
   ...route,
   ...menu,
   ...noticia,
-  ...version
+  ...version,
+  ...notifi
 ]
 
 if (process.env.NODE_ENV !== 'production') {

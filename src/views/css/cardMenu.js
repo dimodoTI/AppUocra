@@ -8,12 +8,12 @@ export const cardMenu = css`
             display: grid; 
             height:12vh;
             width:100%;
-            background-color:var(--color-gris-oscuro);
+            background-color:rgba(21, 21, 21, .6) ;;
             grid-template-columns: 10vw 84vw;
             grid-gap:.5rem;
             align-items: center;
             border-radius: .4rem;  
-            opacity:.7;
+            opacity:1;
             cursor: pointer;
         }
         #ciDivIcomo{
