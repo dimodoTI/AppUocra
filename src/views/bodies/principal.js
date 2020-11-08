@@ -28,8 +28,10 @@ import {
     getNotificacion as get_notifi
 } from "../../redux/notifi/actions"
 import { showWarning, setMenu } from "../../redux/ui/actions";
-import { prendeNotificacion, apagaNotificacion } from "../../redux/notifi/actions";
-
+import { wsConexion, prendeNotificacion, apagaNotificacion } from "../../redux/notifi/actions";
+import {
+    connect as connectWs
+} from "../../redux/ws"
 
 const MENU_TIMESTAMP = "menu.timeStamp"
 const MENU_ERRORGETTIMESTAMP = "menu.errorTimeStamp"
@@ -210,6 +212,20 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
             const SeMuestraEnUnasDeEstasPantallas = "-principal-".indexOf("-" + state.screen.name + "-") != -1
             if (haveBodyArea && SeMuestraEnUnasDeEstasPantallas) {
                 this.hidden = false
+                //connectWs();
+                //if (state.notifi.wsConexion!=null){
+                if (typeof state.notifi.wsConexion === 'undefined' || state.notifi.wsConexion == null){
+                    let myWs = null
+                    store.dispatch(wsConexion(myWs))
+                }else{
+                    if (state.notifi.wsConexion.action.readyState !== WebSocket.OPEN){
+                        store.dispatch(showWarning(store.getState().screen.name, 0))
+                        let myWs = null
+                        store.dispatch(wsConexion(myWs))                           
+                    }
+                }
+                    //store.dispatch(wsConexion(state.notifi.wsConexion))
+                //}
             }
             this.update();
         }
@@ -219,7 +235,10 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
             // }
             //let sVersion = JSON.parse(localStorage.getItem("version"));
             if (localStorage.getItem("version") == null || JSON.parse(localStorage.getItem("version"))[0].numero != state.version.entities[0].numero) {
-                localStorage.clear();
+                //localStorage.clear();
+                localStorage.removeItem("version");
+                localStorage.removeItem("menu");
+                localStorage.removeItem("noticia");
                 localStorage.setItem("version", JSON.stringify(state.version.entities));
                 store.dispatch(get_menu({ orderby: "origen,idMenu,orden", filter: "Activo" }))
             } else {

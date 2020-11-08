@@ -60,7 +60,7 @@ export class splashScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElemen
     render() {
         return html`
         <div id="cuerpo" @click=${this.proximo}>
-            <div style="padding: 1vh 0 0 2vw">v.3</div>
+            <div style="padding: 1vh 0 0 2vw">v.22</div>
             <div id="uno">
         
             </div>
@@ -78,6 +78,9 @@ export class splashScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElemen
             const SeMuestraEnUnasDeEstasPantallas = "-splash-".indexOf("-" + state.screen.name + "-") != -1
             if (haveBodyArea && SeMuestraEnUnasDeEstasPantallas) {
                 this.hidden = false
+                this.timeOut = setTimeout(() => {
+                    this.proximo();
+                }, 2000)
             }
             this.update();
         }

@@ -15,7 +15,10 @@ import {
     EDIT,
     SET,
     PRENDE_NOTIFICACION,
-    APAGA_NOTIFICACION
+    APAGA_NOTIFICACION,
+    WS_CONEXION_SUCCESS,
+    WS_CONEXION_ERROR,
+    WS_RECONECT
 } from "./actions";
 import { prendeNotificacion, apagaNotificacion } from "../notifi/actions";
 
@@ -33,6 +36,9 @@ const initialState = {
     entityNotificaciones: null,
     entityNotificacionesTimeStamp: null,
     entityNotificacionesErrorTimeStamp: null,
+    wsConexion: null,
+    wsConexionTimeStamp: null,
+    wsConexionErrorTimeStamp: null,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -126,6 +132,17 @@ export const reducer = (state = initialState, action) => {
             break;
         case APAGA_NOTIFICACION:
             newState.apagaNotificacionTimeStamp = (new Date()).getTime();
+            break;
+        case WS_CONEXION_SUCCESS:
+            newState.wsConexion = action;
+            newState.wsConexionTimeStamp = (new Date()).getTime();
+            break;
+        case WS_CONEXION_ERROR:
+            newState.wsConexion = null;
+            newState.wsConexionErrorTimeStamp = (new Date()).getTime();
+            break;
+        case WS_RECONECT:
+            newState.wsConexion = null;
             break;
     }
     return newState;

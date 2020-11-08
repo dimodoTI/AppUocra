@@ -20,8 +20,11 @@ import {
 import {
     getNotificacion as get_notifi
 } from "./redux/notifi/actions"
+import {
+    connect as connectWs
+} from "./redux/ws"
 
-import {prendeNotificacion, apagaNotificacion} from "./redux/notifi/actions"
+import {wsConexion, prendeNotificacion, apagaNotificacion, clearStorage} from "./redux/notifi/actions"
 store.dispatch(captureMedia())
 store.dispatch(goTo("splash"))
 
@@ -31,36 +34,10 @@ let fecha =  d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" 
 
 //let fecha = "2020-11-02"
 store.dispatch(get_notifi({filter: "FechaPublicacion ge " + fecha}, fecha));
-
-let connection = new WebSocket('wss://ws.notificaciones.dimodo.ga:9099');
-
-connection.onopen = () => {
-    connection.send(JSON.stringify({
-        type: "new",
-        id: "1",
-        rol: "client",
-        data: ""
-    }));
-};
-
-connection.onmessage = (msg) => {
-    //let data = JSON.parse(msg.data);
-    //console.log(msg.data)
-    if (msg.data.substring(0,1) =="{"){
-        let data = JSON.parse(msg.data);
-        if (data.action == "prender"){
-            store.dispatch(prendeNotificacion())
-        }
-        if (data.action == "apagar"){
-            store.dispatch(apagaNotificacion())
-        }
-    }
-};
-
-connection.onerror = (err) => {
-    console.log("Got error", err);
-};
-
+//let myWs = new WebSocket('wss://ws.notificaciones.dimodo.ga:9099')
+//let myWs = null
+//store.dispatch(wsConexion(myWs))
+//connectWs();
 
 
 //store.dispatch(goToNode("3"))
