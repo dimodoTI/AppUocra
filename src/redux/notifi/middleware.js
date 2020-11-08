@@ -109,7 +109,7 @@ export const wsConexion = ({
                     //let myWs = new WebSocket('wss://ws.notificaciones.dimodo.ga:9099')
                     getState().notifi.wsConexion = null;
                     dispatch(actWsConecion(getState().notifi.wsConexion));
-                    dispatch(showWarning(store.getState().screen.name, 0))
+                    dispatch(showWarning(getState().screen.name, 0))
                 }, 1000);
             };
             
