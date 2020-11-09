@@ -19,7 +19,7 @@ import {
 import {
     CHECK
 } from "../../../assets/icons/icons"
-import { setMenu, showWarning } from "../../redux/ui/actions";
+import { setMenu } from "../../redux/ui/actions";
 import {getNotificacion as get_notifi} from "../../redux/notifi/actions"
 import { prendeNotificacion, apagaNotificacion } from "../../redux/notifi/actions";
 

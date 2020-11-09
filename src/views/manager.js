@@ -88,7 +88,7 @@ export class viewManager extends connect(store, MEDIA_CHANGE, SCREEN)(LitElement
             <notificacion-screen class="body"></notificacion-screen>
 
             <pantalla-horizontal-screen  class="body"></pantalla-horizontal-screen>
-            <pantalla-warning ></pantalla-warning>
+            <pantalla-warning  id="warning"></pantalla-warning>
             <dimodo-spinner type="spinner2"></dimodo-spinner>
       
         `

@@ -37,13 +37,16 @@ export const hideError = () => ({
   type: HIDE_ERROR
 });
 
-export const showWarning = (pagina, nroWarning) => ({
+export const showWarning = (pagina = "", nroWarning = -1, backgroundColor = "fondoInformacion", timeOut = 1500) => ({
   type: SHOW_WARNING,
   pagina: pagina,
-  nroWarning: nroWarning
+  nroWarning: nroWarning,
+  backgroundColor: backgroundColor,
+  timeOut: timeOut,
 });
+
 export const hideWarning = () => ({
-  type: HIDE_WARNING
+  type: HIDE_WARNING,
 });
 
 export const captureMedia = () => ({

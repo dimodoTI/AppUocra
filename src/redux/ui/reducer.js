@@ -56,16 +56,19 @@ export const reducer = (state = initialState, action) => {
             newState.error.messages = null
             break;
         case SHOW_WARNING:
-            newState.warning.timeStamp = (new Date()).getTime()
-            newState.warning.pagina = action.pagina
-            newState.warning.nroWarning = action.nroWarning
-            newState.warning.hidden = false
+            newState.warning.timeStamp = new Date().getTime();
+            newState.warning.pagina = action.pagina;
+            newState.warning.backgroundColor = action.backgroundColor;
+            newState.warning.nroWarning = action.nroWarning;
+            newState.warning.hidden = false;
+            newState.warning.timeOut = action.timeOut;
             break;
         case HIDE_WARNING:
-            newState.warning.timeStamp = (new Date()).getTime()
-            newState.warning.pagina = ""
-            newState.warning.nroWarning = -1
-            newState.warning.hidden = true
+            newState.warning.timeStamp = new Date().getTime();
+            newState.warning.pagina = "";
+            newState.warning.nroWarning = -1;
+            newState.warning.hidden = true;
+            newState.warning.timeOut = 1500;
             break;
         case SET_MEDIA:
             newState.media.size = action.size

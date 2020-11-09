@@ -52,6 +52,7 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
         this.hidden = true
         this.area = "body"
         this.current = ""
+        this.irNotificacion = true
     }
 
     static get styles() {
@@ -215,13 +216,20 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
                 //connectWs();
                 //if (state.notifi.wsConexion!=null){
                 if (typeof state.notifi.wsConexion === 'undefined' || state.notifi.wsConexion == null){
+                    //store.dispatch(showWarning("warning", 0, "fondoError", 1500))
                     let myWs = null
                     store.dispatch(wsConexion(myWs))
                 }else{
                     if (state.notifi.wsConexion.action.readyState !== WebSocket.OPEN){
-                        store.dispatch(showWarning(store.getState().screen.name, 0))
                         let myWs = null
-                        store.dispatch(wsConexion(myWs))                           
+                        store.dispatch(wsConexion(myWs))   
+
+                        this.irNotificacion = false
+                        var d = new Date();
+                        d.setDate(d.getDate()-10);
+                        let fecha =  d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+                        store.dispatch(get_notifi({filter: "FechaPublicacion ge " + fecha}, fecha));
+                       
                     }
                 }
                     //store.dispatch(wsConexion(state.notifi.wsConexion))
@@ -256,7 +264,7 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
             if (sMenu != null && sNoticia != null) {
                 store.dispatch(set_menu(JSON.parse(sMenu)))
             } else {
-                store.dispatch(showWarning(store.getState().screen.name, 0))
+                store.dispatch(showWarning("warning", 0, "fondoError", 1500))
             }
         }
 
@@ -281,20 +289,33 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
         }
         if (name == MENU_ERRORGETTIMESTAMP && this.current == "principal") {
             if (!state.menu.entities || !state.noticia.entities) {
-                store.dispatch(showWarning(store.getState().screen.name, 0))
+                store.dispatch(showWarning("warning", 0, "fondoError", 1500))
             }
         }
         if (name == NOTICIA_ERRORGETTIMESTAMP && this.current == "principal") {
             if (!state.menu.entities || !state.noticia.entities) {
-                store.dispatch(showWarning(store.getState().screen.name, 0))
+                store.dispatch(showWarning("warning", 0, "fondoError", 1500))
             }
         }
         if (name == NOTIFI_TIMESTAMP && this.current == "principal") {
-            store.dispatch(goTo("notificacion"));
+            if (this.irNotificacion){
+                let ir = false
+                for (var i = 0; i < state.notifi.entityNotificaciones.length; i++){
+                    if (state.notifi.entityNotificaciones[i].Activo){
+                        ir = true
+                        break;
+                    }
+                }
+                if (ir){
+                    store.dispatch(goTo("notificacion"));
+                }else{
+                    store.dispatch(showWarning("warning", 0, "fondoError", 1500))
+                }
+            }
         }
         if (name == NOTIFI_ERRORGETTIMESTAMP) {
             store.dispatch(apagaNotificacion())
-            store.dispatch(showWarning(store.getState().screen.name, 0))
+            store.dispatch(showWarning("warning", 0, "fondoError", 1500))
         }
         if (name == PRENDE_NOTIFICACION) {
             this.shadowRoot.querySelector("#notificacion").setAttribute("si", "")
@@ -305,6 +326,7 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
     }
 
     notif() {
+        this.irNotificacion = true
         store.dispatch(get_notifi({filter: "FechaPublicacion ge " + store.getState().notifi.fechaDesdeGet}, store.getState().notifi.fechaDesdeGet));
     }
     clickGremio() {

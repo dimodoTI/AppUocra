@@ -105,12 +105,11 @@ export const wsConexion = ({
             
             action.conexion.onclose = function(e) {
                 console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
-                setTimeout(function() {
-                    //let myWs = new WebSocket('wss://ws.notificaciones.dimodo.ga:9099')
-                    getState().notifi.wsConexion = null;
-                    dispatch(actWsConecion(getState().notifi.wsConexion));
-                    dispatch(showWarning(getState().screen.name, 0))
-                }, 1000);
+                // setTimeout(function() {
+                //     getState().notifi.wsConexion = null;
+                //     dispatch(actWsConecion(getState().notifi.wsConexion));
+                //     dispatch(showWarning("warning", 0, "fondoError", 1500))
+                // }, 1000);
             };
             
             action.conexion.onerror = (err) => {
