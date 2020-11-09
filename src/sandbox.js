@@ -1,42 +1,39 @@
-import { } from "../css/main.css"
-import { } from "../css/media.css"
-import { } from "../css/quicksand.css"
-import { } from "../css/fontSizes.css"
-import { } from "../css/colors.css"
-import { } from "../css/shadows.css"
-import { } from "../css/imagenes.css"
-import {
-    store
-} from "../src/redux/store"
-import {
-    viewManager
-} from "./views/manager"
-import {
-    captureMedia
-} from "./redux/ui/actions";
-import {
-    goTo
-} from "./redux/routing/actions"
-import {
-    getNotificacion as get_notifi
-} from "./redux/notifi/actions"
-import {
-    connect as connectWs
-} from "./redux/ws"
+/** @format */
 
-import {wsConexion, prendeNotificacion, apagaNotificacion, clearStorage} from "./redux/notifi/actions"
-store.dispatch(captureMedia())
-store.dispatch(goTo("splash"))
+import {} from "../css/main.css";
+import {} from "../css/media.css";
+import {} from "../css/quicksand.css";
+import {} from "../css/fontSizes.css";
+import {} from "../css/colors.css";
+import {} from "../css/shadows.css";
+import {} from "../css/imagenes.css";
+import { store } from "../src/redux/store";
+import { viewManager } from "./views/manager";
+import { captureMedia } from "./redux/ui/actions";
+import { goTo } from "./redux/routing/actions";
+import { getNotificacion as get_notifi } from "./redux/notifi/actions";
+//import { connect as connectWs } from "./redux/ws";
+//import { wsConexion, prendeNotificacion, apagaNotificacion, clearStorage } from "./redux/notifi/actions";
+
+import { WSconnect } from "./redux/notifications/actions";
+
+store.dispatch(captureMedia());
+store.dispatch(goTo("splash"));
 
 var d = new Date();
-d.setDate(d.getDate()-10);
-let fecha =  d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
-store.dispatch(get_notifi({filter: "FechaPublicacion ge " + fecha}, fecha));
+d.setDate(d.getDate() - 10);
+let fecha = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+
+//let fecha = "2020-11-02"
+
+//store.dispatch(get_notifi({filter: "FechaPublicacion ge " + fecha}, fecha));
+
+WSconnect();
+
 //let myWs = new WebSocket('wss://ws.notificaciones.dimodo.ga:9099')
 //let myWs = null
 //store.dispatch(wsConexion(myWs))
 //connectWs();
-
 
 //store.dispatch(goToNode("3"))
 
