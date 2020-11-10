@@ -11,22 +11,10 @@ import { store } from "../src/redux/store";
 import { viewManager } from "./views/manager";
 import { captureMedia } from "./redux/ui/actions";
 import { goTo } from "./redux/routing/actions";
-import { getNotificacion as get_notifi } from "./redux/notifi/actions";
-//import { connect as connectWs } from "./redux/ws";
-//import { wsConexion, prendeNotificacion, apagaNotificacion, clearStorage } from "./redux/notifi/actions";
-
 import { WSconnect } from "./redux/notifications/actions";
 
 store.dispatch(captureMedia());
 store.dispatch(goTo("splash"));
-
-var d = new Date();
-d.setDate(d.getDate() - 10);
-let fecha = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
-
-//let fecha = "2020-11-02"
-
-//store.dispatch(get_notifi({filter: "FechaPublicacion ge " + fecha}, fecha));
 
 WSconnect();
 

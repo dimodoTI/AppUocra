@@ -1,46 +1,46 @@
 /** @format */
 import { uuidv4 } from "../libs/funciones";
 export const WebSocketNotificaciones = (dispatch, url, id, onOpen, onMessage, onError, onClose, autoConnect = true) => {
-    if (!url) {
-        console.log("no se especifico url para el WebSocket");
-        return;
-    }
-    let ws = new WebSocket(url);
+	if (!url) {
+		console.log("no se especifico url para el WebSocket");
+		return;
+	}
+	let ws = new WebSocket(url);
 
-    ws.onopen = () => {
-        let connectionId = id || uuidv4();
+	ws.onopen = () => {
+		let connectionId = id || uuidv4();
 
-        ws.send(
-            JSON.stringify({
-                type: "new",
-                id: connectionId,
-                rol: "client",
-                data: "",
-            })
-        );
+		ws.send(
+			JSON.stringify({
+				type: "new",
+				id: connectionId,
+				rol: "client",
+				data: "",
+			})
+		);
 
-        if (onOpen) dispatch(onOpen(ws, connectionId));
-    };
+		if (onOpen) dispatch(onOpen(ws, connectionId));
+	};
 
-    ws.onerror = (err) => {
-        if (onError) dispatch(onError(err));
-    };
+	ws.onerror = (err) => {
+		if (onError) dispatch(onError(err));
+	};
 
-    ws.onclose = (e) => {
-        if (onClose) dispatch(onClose(e));
-        if (autoConnect) reconect(1000);
-    };
+	ws.onclose = (e) => {
+		if (onClose) dispatch(onClose(e));
+		if (autoConnect) reconect(1000);
+	};
 
-    ws.onmessage = (msg) => {
-        if (onMessage) dispatch(onMessage(msg));
-    };
+	ws.onmessage = (msg) => {
+		if (onMessage) dispatch(onMessage(msg));
+	};
 
-    const reconect = (timeOut) => {
-        setTimeout(() => {
-            ws.close();
-            ws = WebSocketNotificaciones(dispatch, url, id, onOpen, onMessage, onError, onClose, autoConnect);
-        }, timeOut);
-    };
+	const reconect = (timeOut) => {
+		setTimeout(() => {
+			ws.close();
+			ws = WebSocketNotificaciones(dispatch, url, id, onOpen, onMessage, onError, onClose, autoConnect);
+		}, timeOut);
+	};
 
-    return ws;
+	return ws;
 };
