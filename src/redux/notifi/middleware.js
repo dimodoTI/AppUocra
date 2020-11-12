@@ -17,7 +17,7 @@ export const storage = ({ dispatch, getState }) => (next) => (action) => {
 	next(action);
 	if (action.type === CLEAR_STORAGE) {
 		localStorage.removeItem("notifi");
-		dispatch(get_notifi({ filter: "FechaPublicacion ge " + getState().notifi.fechaDesdeGet }, getState().notifi.fechaDesdeGet));
+		dispatch(get_notifi({ filter: "FechaPublicacion ge " + getState().notifi.fechaDesdeGet, orderby: "Id desc" }, getState().notifi.fechaDesdeGet));
 	}
 };
 

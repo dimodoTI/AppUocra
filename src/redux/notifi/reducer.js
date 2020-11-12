@@ -34,6 +34,7 @@ export const reducer = (state = initialState, action) => {
 			let mfec = new Date(state.fechaDesdeGet);
 			let fechaDesdeGet = mfec.getTime();
 			let campanaPrendida = false;
+
 			let mLocalStorage = localStorage.getItem("notifi");
 			if (mLocalStorage != null && mLocalStorage != "{}") {
 				var totalBorrados = 0;

@@ -48,7 +48,7 @@ export class splashScreen extends connect(store, MEDIA_CHANGE, SCREEN)(LitElemen
 	render() {
 		return html`
 			<div id="cuerpo" @click=${this.proximo}>
-				<div style="padding: 1vh 0 0 2vw">v.25</div>
+				<div style="padding: 1vh 0 0 2vw"></div>
 				<div id="uno"></div>
 				<div id="dos"></div>
 				<div></div>

@@ -10,7 +10,7 @@ export const onOpen = ({ dispatch }) => (next) => (action) => {
 		var d = new Date();
 		d.setDate(d.getDate() - 10);
 		let fecha = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
-		dispatch(get_notifi({ filter: "FechaPublicacion ge " + fecha }, fecha));
+		dispatch(get_notifi({ filter: "FechaPublicacion ge " + fecha, orderby: "Id desc" }, fecha));
 	}
 };
 export const onClose = ({ dispatch }) => (next) => (action) => {

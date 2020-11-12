@@ -58,6 +58,13 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
 				background-color: transparent;
 				align-self: center;
 			}
+			#divVersion {
+				position: absolute;
+				top: 2px;
+				right: 4px;
+				font-size: 2vh;
+				color: var(--color-gris);
+			}
 			#titulo {
 				height: 100%;
 				width: 100%;
@@ -152,6 +159,7 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
 	render() {
 		return html`
 			<div id="cuerpo">
+				<div id="divVersion">V.: 1.2</div>
 				<div id="titulo"></div>
 				<div>
 					<hr id="linea" />
@@ -314,7 +322,7 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
 
 	notif() {
 		store.dispatch(mostrarNotificaciones(true));
-		store.dispatch(get_notifi({ filter: "FechaPublicacion ge " + store.getState().notifi.fechaDesdeGet }, store.getState().notifi.fechaDesdeGet));
+		store.dispatch(get_notifi({ filter: "FechaPublicacion ge " + store.getState().notifi.fechaDesdeGet, orderby: "Id desc" }, store.getState().notifi.fechaDesdeGet));
 	}
 	clickGremio() {
 		this.clickIr("gremio", 1);
