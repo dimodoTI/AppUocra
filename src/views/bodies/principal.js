@@ -79,11 +79,13 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
 			}
 			#notificacion {
 				height: 100%;
+				width: 3rem;
 				background-image: var(--imagen-campana);
 				background-repeat: no-repeat;
 				background-position: bottom;
 				background-size: 6vh;
 				cursor: pointer;
+				justify-self: center;
 			}
 			#notificacion[si] {
 				background-image: var(--imagen-campana-notificacion);
@@ -159,7 +161,7 @@ export class principalScreen extends connect(store, NOTIFI_TIMESTAMP, NOTIFI_ERR
 	render() {
 		return html`
 			<div id="cuerpo">
-				<div id="divVersion">V.: 1.2</div>
+				<div id="divVersion">v.: 1.5</div>
 				<div id="titulo"></div>
 				<div>
 					<hr id="linea" />
